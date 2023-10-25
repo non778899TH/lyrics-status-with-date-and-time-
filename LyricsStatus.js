@@ -723,7 +723,6 @@ function getStatusString(lyrics, time) {
 }
 function parseStatusString(status, data) {
     if(typeof data !== "object") return;
-
     if(data.lyrics) {
         status = status
             .replace("{lyrics}", data.lyrics)
@@ -750,7 +749,8 @@ function parseStatusString(status, data) {
             .replace("{song_author_upper}", data.songAuthor.toUpperCase())
             .replace("{song_author_lower}", data.songAuthor.toLowerCase());
     }
-
+    status = status.replace("{cdate}", new Date().toLocaleDateString())
+    .replace("{ctime}", new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Bangkok', hour12: false }));
     return status.slice(0, 128);
 }
 function sleep(ms) {
